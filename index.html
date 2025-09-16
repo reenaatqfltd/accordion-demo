@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QF Ltd - Accordion Site</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f8f9fa;
+      color: #333;
+    }
+
+    header {
+      background: #004080;
+      color: #fff;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    nav {
+      background: #00264d;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      padding: 0.5rem;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    h1 {
+      margin: 0;
+    }
+
+    .accordion {
+      cursor: pointer;
+      padding: 1rem;
+      width: 100%;
+      border: none;
+      text-align: left;
+      outline: none;
+      font-size: 1.1rem;
+      transition: 0.3s;
+      background: #e0e0e0;
+      margin: 0;
+    }
+
+    .accordion.active {
+      background: #c0c0c0;
+    }
+
+    .panel {
+      padding: 0 1rem;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+      background: #fff;
+      border-left: 3px solid #004080;
+    }
+
+    /* Nested accordion (for features) */
+    .nested-accordion {
+      cursor: pointer;
+      padding: 0.5rem 1rem;
+      margin: 0.25rem 0;
+      background: #f2f2f2;
+      border: none;
+      outline: none;
+      width: 100%;
+      text-align: left;
+      font-size: 1rem;
+    }
+
+    .nested-panel {
+      padding: 0 1rem;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+      background: #fafafa;
+      border-left: 2px dashed #aaa;
+    }
+
+    footer {
+      background: #00264d;
+      color: #fff;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>QF Ltd</h1>
+    <p>Innovative Solutions for Business</p>
+  </header>
+
+  <nav>
+    <a onclick="openAccordion(0)">About</a>
+    <a onclick="openAccordion(1)">Approach</a>
+    <a onclick="openAccordion(2)">Features</a>
+    <a onclick="openAccordion(3)">Contact</a>
+  </nav>
+
+  <!-- About -->
+  <button class="accordion">About Us</button>
+  <div class="panel">
+    <p>Paste your <strong>about.html</strong> content here.</p>
+  </div>
+
+  <!-- Approach -->
+  <button class="accordion">Our Approach</button>
+  <div class="panel">
+    <p>Paste your <strong>approach.html</strong> content here.</p>
+  </div>
+
+  <!-- Features with nested accordion -->
+  <button class="accordion">Our Features</button>
+  <div class="panel">
+    <p>Explore our key features:</p>
+
+    <button class="nested-accordion">Feature 1: Efficiency</button>
+    <div class="nested-panel">
+      <p>Details about how we improve efficiency for our clients.</p>
+    </div>
+
+    <button class="nested-accordion">Feature 2: Reliability</button>
+    <div class="nested-panel">
+      <p>Details about our reliable processes and systems.</p>
+    </div>
+
+    <button class="nested-accordion">Feature 3: Scalability</button>
+    <div class="nested-panel">
+      <p>Details on how our solutions grow with your business.</p>
+    </div>
+  </div>
+
+  <!-- Contact -->
+  <button class="accordion">Contact</button>
+  <div class="panel">
+    <p>Email: <a href="mailto:info@qfltd.com">info@qfltd.com</a></p>
+    <p>LinkedIn: <a href="https://www.linkedin.com/company/qfltd" target="_blank">QF Ltd</a></p>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 QF Ltd. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Main accordion
+    const acc = document.querySelectorAll(".accordion");
+    acc.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        btn.classList.toggle("active");
+        const panel = btn.nextElementSibling;
+        if (panel.style.maxHeight) {
+          panel.style.maxHeight = null;
+        } else {
+          panel.style.maxHeight = panel.scrollHeight + "px";
+        }
+      });
+    });
+
+    // Nested accordion
+    const nestedAcc = document.querySelectorAll(".nested-accordion");
+    nestedAcc.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const panel = btn.nextElementSibling;
+        if (panel.style.maxHeight) {
+          panel.style.maxHeight = null;
+        } else {
+          panel.style.maxHeight = panel.scrollHeight + "px";
+        }
+      });
+    });
+
+    // Function to open accordion via nav
+    function openAccordion(index) {
+      acc[index].click();
+      window.scrollTo({ top: acc[index].offsetTop - 50, behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>
